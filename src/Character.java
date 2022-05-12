@@ -5,44 +5,66 @@ public class Character {
     public int manaPoints = 200;
 
     /**
-     * Create two Constructors
-     * 1 - Non Parameterized Constructor
-     * 2 - Parameterized Constructor Initializing healthPoints, level, CharacterName and mana
+     * Constructors 
      */
-    Character(String name, int newHp, int newLevel, int newMana){
+    Character(String name){
         characterName = name;
-        healthPoints = newHp;
-        level = newLevel;
-        manaPoints = newMana;
     }
-
-    public Character(String name) {
+    Character(int newHp, int newLevel, int newMana){
+    healthPoints = newHp;
+    level = newLevel;
+    manaPoints = newMana;
     }
 
     /**
-     * Create a Method that displays the Name of the Character
-     * eg. "Character Initialized : Gandalf"
+     * Method that displays the Name of the Character
      */
     public void displayName(){
-    //    System.out.println("Character Initialized:"+this.characterName);
+       System.out.println("Character Initialized: "+this.characterName);
     }
+    
     /**
-     * Create a method to Damage Target Character
+     * Method to Damage Target Character
      */
-    public void damageTarget(Character enemyCharacter,int damagePoints){
+    public void damageTarget(Character enemyCharacter,int damagePoints, int manaCost){
         /**
          * Deduct health points from enemy character
+         * Deduct corresponding mana cost
          */
         enemyCharacter.healthPoints -= damagePoints;
-        System.out.println("enemy character HP Left = " + enemyCharacter.healthPoints);
+        enemyCharacter.manaPoints-=manaCost;
+        System.out.println("Enemy character HP Left = " + enemyCharacter.healthPoints);
+        System.out.println("\n");
 
         /**
          * Prompt Character is defeated if HP falls below 0
-         * eg. Character Shaman defeated.
+         * Display the winner
          */
        if(enemyCharacter.healthPoints <=0){
-           System.out.println(enemyCharacter.characterName +" is now defeated");
+           System.out.println(enemyCharacter.characterName +" is now defeated\n");
+           System.out.println(characterName + " wins the battle");
        }
     }
-
+    /**
+     * Method to make recovery of the Character
+     */
+    public void Recovery(Character Character,int heal, int IncreaseMana){
+        /**
+         * Increase HP of the character
+         * Increase mana points of the character
+         */
+        Character.healthPoints += heal;
+        Character.manaPoints += heal;
+        System.out.println(characterName+" Mana Total = " +Character.manaPoints);  
+        System.out.println(characterName+" HP total = " + Character.healthPoints);
+        System.out.println("\n");     
+    }
+    /**
+     * Method to increase the level of the winner to level 10
+     */
+    public void Level(Character increaseLevel, int level){
+        increaseLevel.level = level;
+        System.out.println(characterName+" has reach level "+increaseLevel.level);
+        System.out.println("\n");
+    }
 } 
